@@ -1,14 +1,17 @@
 const sql = require("mssql");
 
 const config = {
-  user: "nrgPortalApiUser",
-  password: "getMYdataN0W",
-  server: "192.168.0.220",
-  database: "NRG",
-  options: {
-    encrypt: true,
+user: "nrgPortalApiUser",
+password: "getMYdataN0W",
+server: "192.168.0.220",
+database: "NRG",
+options: {
+    encrypt: false,
     trustServerCertificate: true,
-  },
+    enableArithAbort: true
+},
+connectionTimeout: 30000,
+requestTimeout: 30000
 };
 
 const poolPromise = new sql.ConnectionPool(config)
