@@ -1,12 +1,11 @@
-const express = require('express');
-const recordsRouter = require('./routes/records');
-
+const express = require("express");
 const app = express();
-const port = 3000;
+const recordsRoutes = require("./routes/records");
 
 app.use(express.json());
-app.use('/api/records', recordsRouter);
+app.use("/api", recordsRoutes);
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
