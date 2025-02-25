@@ -6,6 +6,7 @@ const recordsController = require("../controllers/recordsController");
 const householdsController = require("../controllers/householdsController");
 const monthesController = require("../controllers/monthesController");
 const resourceController = require("../controllers/resourceController");
+const households_with_codesController = require("../controllers/households_with_codesController");
 
 router.get("/", (req, res) => {
   const readmePath = path.join(__dirname, "../README.md");
@@ -29,6 +30,10 @@ router.get("/monthes/:year/:chart_id", monthesController.getMonthByChart_id);
 router.get(
   "/resource/:year/:chart_id",
   resourceController.getResourceByChart_id
+);
+router.get(
+  "/householdswithcodes/:id",
+  households_with_codesController.getHouseholds_with_codesByChart_id
 );
 
 module.exports = router;
