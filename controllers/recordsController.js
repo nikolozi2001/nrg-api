@@ -1,11 +1,23 @@
 const { sql, poolPromise } = require("../db");
+const Joi = require("joi");
+const logger = require("../logger"); // import logger
+
+const recordSchema = Joi.object({
+  name: Joi.string().required(),
+  value: Joi.string().required(),
+});
 
 const getAllRecords = async (req, res) => {
   try {
+    logger.info("getAllRecords: Attempting to get all records");
     const pool = await poolPromise;
+    logger.info("getAllRecords: Connected to the database");
     const result = await pool.request().query("SELECT * FROM codes");
+    logger.info("getAllRecords: Query executed successfully");
     res.json(result.recordset);
   } catch (err) {
+    logger.error(`Error in getAllRecords: ${err.message}`);
+    logger.error(err); // log the full error object
     res.status(500).json({ error: err.message });
   }
 };
@@ -20,14 +32,18 @@ const getRecordById = async (req, res) => {
       .query("SELECT * FROM codes WHERE code = @code");
     res.json(result.recordset[0]);
   } catch (err) {
-    console.error(`Error: ${err.message}`);
-    console.error(err);
+    logger.error(`Error in getRecordById: ${err.message}`);
+    logger.error(err); // log the full error object
     res.status(500).json({ error: err.message });
   }
 };
 
 const createRecord = async (req, res) => {
   const { name, value } = req.body;
+  const { error } = recordSchema.validate(req.body);
+  if (error) {
+    return res.status(400).json({ error: error.details[0].message });
+  }
   try {
     const pool = await poolPromise;
     const result = await pool
@@ -39,6 +55,8 @@ const createRecord = async (req, res) => {
       );
     res.status(201).json({ id: result.recordset[0].id, name, value });
   } catch (err) {
+    logger.error(`Error in createRecord: ${err.message}`);
+    logger.error(err); // log the full error object
     res.status(500).json({ error: err.message });
   }
 };
@@ -56,6 +74,8 @@ const updateRecord = async (req, res) => {
       .query("UPDATE records SET name = @name, value = @value WHERE id = @id");
     res.json({ id, name, value });
   } catch (err) {
+    logger.error(`Error in updateRecord: ${err.message}`);
+    logger.error(err); // log the full error object
     res.status(500).json({ error: err.message });
   }
 };
@@ -70,6 +90,8 @@ const deleteRecord = async (req, res) => {
       .query("DELETE FROM records WHERE id = @id");
     res.status(204).end();
   } catch (err) {
+    logger.error(`Error in deleteRecord: ${err.message}`);
+    logger.error(err); // log the full error object
     res.status(500).json({ error: err.message });
   }
 };

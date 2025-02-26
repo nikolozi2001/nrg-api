@@ -1,28 +1,29 @@
 const sql = require("mssql");
+require("dotenv-safe").config();
+const logger = require("./logger");
 
 const config = {
-user: "nrgPortalApiUser",
-password: "getMYdataN0W",
-server: "192.168.0.220",
-database: "NRG",
-options: {
-    encrypt: false,
-    trustServerCertificate: true,
-    enableArithAbort: true
-},
-connectionTimeout: 30000,
-requestTimeout: 30000
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  server: process.env.DB_SERVER,
+  database: process.env.DB_DATABASE,
+  port: parseInt(process.env.DB_PORT, 10),
+  options: {
+    encrypt: false, // Disable encryption
+    enableArithAbort: true,
+  },
 };
 
 const poolPromise = new sql.ConnectionPool(config)
   .connect()
   .then((pool) => {
-    console.log("Connected to SQL Server");
+    logger.info("Connected to SQL Server");
     return pool;
   })
   .catch((err) => {
-    console.error("Database Connection Failed! Bad Config: ", err);
-    throw err;
+    logger.error("Database Connection Failed! Bad Config: ", err);
+    logger.error("Error details: ", err.message);
+    logger.error("Stack trace: ", err.stack);
   });
 
 module.exports = {

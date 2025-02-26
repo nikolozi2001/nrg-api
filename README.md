@@ -1,6 +1,7 @@
 # NRG API
 
 ## Overview
+
 This API provides endpoints to manage records, households, monthes, and resource data.
 
 ## Prerequisites
@@ -11,22 +12,25 @@ This API provides endpoints to manage records, households, monthes, and resource
 ## Setup
 
 1. Clone the repository:
+
    ```sh
    git clone <repository-url>
    cd nrg-api
    ```
 
 2. Install dependencies:
+
    ```sh
    npm install
    ```
 
 3. Configure the database connection:
-   Update the `db.js` file with your SQL Server credentials.
+   Update the `.env` file with your SQL Server credentials.
 
 ## Running the Server
 
 1. Install dependencies:
+
    ```sh
    npm install
    ```
@@ -60,19 +64,26 @@ The server will run on `http://localhost:3000`.
 
 - **GET /api/resource/:year/:chart_id**: Get resource data by year and chart ID.
 
+### Households with Codes
+
+- **GET /api/householdswithcodes/:id**: Get households with codes data by chart ID.
+
 ## Example Requests
 
 ### Get All Records
+
 ```
 GET /api/records
 ```
 
 ### Get Record by Code
+
 ```
 GET /api/records/1
 ```
 
 ### Create a New Record
+
 ```
 POST /api/records
 Content-Type: application/json
@@ -83,6 +94,7 @@ Content-Type: application/json
 ```
 
 ### Update a Record
+
 ```
 PUT /api/records/1
 Content-Type: application/json
@@ -93,23 +105,33 @@ Content-Type: application/json
 ```
 
 ### Delete a Record
+
 ```
 DELETE /api/records/1
 ```
 
 ### Get Household Data by Chart ID
+
 ```
 GET /api/households/1
 ```
 
 ### Get Month Data by Year and Chart ID
+
 ```
 GET /api/monthes/2018/1
 ```
 
 ### Get Resource Data by Year and Chart ID
+
 ```
 GET /api/resource/2018/1
+```
+
+### Get Households with Codes Data by Chart ID
+
+```
+GET /api/householdswithcodes/1
 ```
 
 ## Error Handling
@@ -131,9 +153,16 @@ nrg-api/
 │   └── householdsController.js
 │   └── monthesController.js
 │   └── resourceController.js
+│   └── households_with_codesController.js
+├── middleware/
+│   └── errorHandler.js
+│   └── validate.js
 ├── routes/
 │   └── records.js
 ├── db.js
+├── logger.js
 ├── app.js
+├── .env
+├── .env.example
 └── README.md
 ```
