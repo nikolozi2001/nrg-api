@@ -2,7 +2,7 @@
 
 ## Overview
 
-This API provides endpoints to manage records, households, monthes, and resource data.
+This API provides endpoints to manage records, households, monthes, resource data, and energy consumption.
 
 ## Prerequisites
 
@@ -68,6 +68,19 @@ The server will run on `http://localhost:3000`.
 
 - **GET /api/householdswithcodes/:id**: Get households with codes data by chart ID.
 
+### Energy Consumption
+
+- **GET /api/energyConsumption/:legend_code**: Get energy consumption data by legend code.
+
+### Energy Consumption By Sector
+
+- **GET /api/energyConsumptionBySector/:legend_code**: Get energy consumption data by sector.
+
+### Energy Production Data
+
+- **GET /api/energyProduction/:legend_code**: Get energy Production data by legend code.
+
+
 ## Example Requests
 
 ### Get All Records
@@ -132,6 +145,18 @@ GET /api/resource/2018/1
 
 ```
 GET /api/householdswithcodes/1
+```
+
+### Get Energy Consumption Data by Legend Code
+
+```
+GET /api/energyConsumption/code123
+```
+
+### Get Energy Consumption Data by Legend Sector
+
+```
+GET /api/getEnergyConsumptionBySector/code123
 ```
 
 ## Error Handling

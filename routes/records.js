@@ -8,6 +8,9 @@ const monthesController = require("../controllers/monthesController");
 const resourceController = require("../controllers/resourceController");
 const households_with_codesController = require("../controllers/households_with_codesController");
 const resource_with_codesController = require("../controllers/resource_with_codesController");
+const energyConsumptionController = require("../controllers/energyConsumptionController");
+const energyConsumptionBySectorController = require("../controllers/energyConsumptionBySectorController");
+const energyProductionController = require("../controllers/energyProductionController");
 
 router.get("/", (req, res) => {
   const readmePath = path.join(__dirname, "../README.md");
@@ -39,6 +42,18 @@ router.get(
 router.get(
   "/resourceswithcodes/:id",
   resource_with_codesController.getResources_with_codesByChart_id
+);
+router.get(
+  "/energyConsumption/:legend_code",
+  energyConsumptionController.getEnergyConsumptionByLegendCode
+);
+router.get(
+  "/energyConsumptionBySector/:legend_code",
+  energyConsumptionBySectorController.getEnergyConsumptionBySector
+);
+router.get(
+  "/energyProduction/:legend_code",
+  energyProductionController.getenergyProduction
 );
 
 module.exports = router;
