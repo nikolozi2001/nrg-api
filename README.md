@@ -2,7 +2,7 @@
 
 ## Overview
 
-This API provides endpoints to manage records, households, monthes, resource data, and energy consumption.
+This API provides endpoints to manage records, households, monthes, resource data, energy consumption, and indicators.
 
 ## Prerequisites
 
@@ -80,6 +80,9 @@ The server will run on `http://localhost:3000`.
 
 - **GET /api/energyProduction/:legend_code**: Get energy Production data by legend code.
 
+### Indicators
+
+- **GET /api/indicators/:name**: Get indicator data by name.
 
 ## Example Requests
 
@@ -159,6 +162,12 @@ GET /api/energyConsumption/code123
 GET /api/getEnergyConsumptionBySector/code123
 ```
 
+### Get Indicator Data by Name
+
+```
+GET /api/indicators/indicator_name
+```
+
 ## Error Handling
 
 If an error occurs, the API will return a JSON response with an error message and a status code of 500.
@@ -179,6 +188,8 @@ nrg-api/
 │   └── monthesController.js
 │   └── resourceController.js
 │   └── households_with_codesController.js
+│   └── energyConsumptionController.js
+│   └── indicatorsController.js
 ├── middleware/
 │   └── errorHandler.js
 │   └── validate.js

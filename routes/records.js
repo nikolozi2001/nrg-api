@@ -11,6 +11,7 @@ const resource_with_codesController = require("../controllers/resource_with_code
 const energyConsumptionController = require("../controllers/energyConsumptionController");
 const energyConsumptionBySectorController = require("../controllers/energyConsumptionBySectorController");
 const energyProductionController = require("../controllers/energyProductionController");
+const indicatorsController = require("../controllers/indicatorsController");
 
 router.get("/", (req, res) => {
   const readmePath = path.join(__dirname, "../README.md");
@@ -55,5 +56,6 @@ router.get(
   "/energyProduction/:legend_code",
   energyProductionController.getenergyProduction
 );
+router.get("/indicators/:name", indicatorsController.getIndicatorsByName);
 
 module.exports = router;
