@@ -60,6 +60,11 @@ The server will run on `http://localhost:3000`.
 
 - **GET /api/monthes/:year/:chart_id**: Get month data by year and chart ID.
 
+### Monthes (All Data)
+
+- **GET /api/monthesAll/year/:year**: Get all months data for a specific year.
+- **GET /api/monthesAll/year/:year/chart/:chart_id**: Get months data for a specific year and chart ID.
+
 ### Resource
 
 - **GET /api/resource/:year/:chart_id**: Get resource data by year and chart ID.
@@ -83,6 +88,21 @@ The server will run on `http://localhost:3000`.
 ### Indicators
 
 - **GET /api/indicators/:name**: Get indicator data by name.
+
+### Coal Supply Consumption (in Terajoules)
+
+- **GET /api/coalSupply/year/:year**: Get all coal supply consumption data for a specific year.
+- **GET /api/coalSupply/code/:code/year/:year**: Get coal supply consumption data for a specific code and year.
+
+### Coal Supply Consumption (in Tons)
+
+- **GET /api/coalSupplyTons/year/:year**: Get all coal supply consumption data in tons for a specific year.
+- **GET /api/coalSupplyTons/code/:code/year/:year**: Get coal supply consumption data in tons for a specific code and year.
+
+### Coal Supply Consumption (in Tons of Oil)
+
+- **GET /api/coalSupplyTonsOfOil/year/:year**: Get all coal supply consumption data in tons of oil for a specific year.
+- **GET /api/coalSupplyTonsOfOil/name/:name/year/:year**: Get coal supply consumption data in tons of oil for a specific name and year.
 
 ## Example Requests
 
@@ -168,6 +188,42 @@ GET /api/getEnergyConsumptionBySector/code123
 GET /api/indicators/indicator_name
 ```
 
+### Get Coal Supply Consumption by Year (in Terajoules)
+
+```
+GET /api/coalSupply/year/2023
+```
+
+### Get Coal Supply Consumption by Code and Year (in Terajoules)
+
+```
+GET /api/coalSupply/code/ABC123/year/2023
+```
+
+### Get Coal Supply Consumption by Year (in Tons)
+
+```
+GET /api/coalSupplyTons/year/2023
+```
+
+### Get Coal Supply Consumption by Code and Year (in Tons)
+
+```
+GET /api/coalSupplyTons/code/ABC123/year/2023
+```
+
+### Get Coal Supply Consumption in Tons of Oil by Year
+
+```
+GET /api/coalSupplyTonsOfOil/year/2023
+```
+
+### Get Coal Supply Consumption in Tons of Oil by Name and Year
+
+```
+GET /api/coalSupplyTonsOfOil/name/ABC123/year/2023
+```
+
 ## Error Handling
 
 If an error occurs, the API will return a JSON response with an error message and a status code of 500.
@@ -189,7 +245,11 @@ nrg-api/
 │   └── resourceController.js
 │   └── households_with_codesController.js
 │   └── energyConsumptionController.js
+│   └── energyConsumptionBySectorController.js
+│   └── energyProductionController.js
 │   └── indicatorsController.js
+│   └── coalSupplyController.js
+│   └── coalSupplyTonsController.js
 ├── middleware/
 │   └── errorHandler.js
 │   └── validate.js

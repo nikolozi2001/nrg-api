@@ -12,6 +12,10 @@ const energyConsumptionController = require("../controllers/energyConsumptionCon
 const energyConsumptionBySectorController = require("../controllers/energyConsumptionBySectorController");
 const energyProductionController = require("../controllers/energyProductionController");
 const indicatorsController = require("../controllers/indicatorsController");
+const coalSupplyController = require("../controllers/coalSupplyController");
+const coalSupplyTonsController = require("../controllers/coalSupplyTonsController");
+const coalSupplyTonsOfOilController = require("../controllers/coalSupplyTonsOfOilController");
+const monthesAllController = require("../controllers/monthesAllController");
 
 router.get("/", (req, res) => {
   const readmePath = path.join(__dirname, "../README.md");
@@ -57,5 +61,13 @@ router.get(
   energyProductionController.getenergyProduction
 );
 router.get("/indicators/:name", indicatorsController.getIndicatorsByName);
+router.get("/coalSupply/year/:year", coalSupplyController.getCoalSupplyByYear);
+router.get("/coalSupply/code/:code/year/:year", coalSupplyController.getCoalSupplyByCodeAndYear);
+router.get("/coalSupplyTons/year/:year", coalSupplyTonsController.getCoalSupplyTonsByYear);
+router.get("/coalSupplyTons/code/:code/year/:year", coalSupplyTonsController.getCoalSupplyTonsByCodeAndYear);
+router.get("/coalSupplyTonsOfOil/year/:year", coalSupplyTonsOfOilController.getCoalSupplyTonsOfOilByYear);
+router.get("/coalSupplyTonsOfOil/code/:code/year/:year", coalSupplyTonsOfOilController.getCoalSupplyTonsOfOilByCodeAndYear);
+router.get("/monthesAll/year/:year", monthesAllController.getAllMonthsByYear);
+router.get("/monthesAll/year/:year/chart/:chart_id", monthesAllController.getMonthsByYearAndChartId);
 
 module.exports = router;
