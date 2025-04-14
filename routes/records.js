@@ -16,6 +16,9 @@ const coalSupplyController = require("../controllers/coalSupplyController");
 const coalSupplyTonsController = require("../controllers/coalSupplyTonsController");
 const coalSupplyTonsOfOilController = require("../controllers/coalSupplyTonsOfOilController");
 const monthesAllController = require("../controllers/monthesAllController");
+const mainNrgIndicatorsController = require("../controllers/mainNrgIndicatorsController");
+const gasPriceGelController = require("../controllers/gasPriceGelController");
+const electricityPriceGelController = require("../controllers/electricityPriceGelController");
 
 router.get("/", (req, res) => {
   const readmePath = path.join(__dirname, "../README.md");
@@ -69,5 +72,8 @@ router.get("/coalSupplyTonsOfOil/year/:year", coalSupplyTonsOfOilController.getC
 router.get("/coalSupplyTonsOfOil/code/:code/year/:year", coalSupplyTonsOfOilController.getCoalSupplyTonsOfOilByCodeAndYear);
 router.get("/monthesAll/year/:year", monthesAllController.getAllMonthsByYear);
 router.get("/monthesAll/year/:year/chart/:chart_id", monthesAllController.getMonthsByYearAndChartId);
+router.get("/mainNrgIndicators/:chartid", mainNrgIndicatorsController.getMainNrgIndicatorsByChartid);
+router.get("/gasPriceGel/:household", gasPriceGelController.getGasPriceGelByHousehold);
+router.get("/electricityPriceGel/:household", electricityPriceGelController.getelectricityPriceGelbyHousehold);
 
 module.exports = router;
