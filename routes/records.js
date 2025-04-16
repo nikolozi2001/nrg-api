@@ -19,6 +19,7 @@ const monthesAllController = require("../controllers/monthesAllController");
 const mainNrgIndicatorsController = require("../controllers/mainNrgIndicatorsController");
 const gasPriceGelController = require("../controllers/gasPriceGelController");
 const electricityPriceGelController = require("../controllers/electricityPriceGelController");
+const objectController = require("../controllers/objectController");
 
 router.get("/", (req, res) => {
   const readmePath = path.join(__dirname, "../README.md");
@@ -65,15 +66,44 @@ router.get(
 );
 router.get("/indicators/:name", indicatorsController.getIndicatorsByName);
 router.get("/coalSupply/year/:year", coalSupplyController.getCoalSupplyByYear);
-router.get("/coalSupply/code/:code/year/:year", coalSupplyController.getCoalSupplyByCodeAndYear);
-router.get("/coalSupplyTons/year/:year", coalSupplyTonsController.getCoalSupplyTonsByYear);
-router.get("/coalSupplyTons/code/:code/year/:year", coalSupplyTonsController.getCoalSupplyTonsByCodeAndYear);
-router.get("/coalSupplyTonsOfOil/year/:year", coalSupplyTonsOfOilController.getCoalSupplyTonsOfOilByYear);
-router.get("/coalSupplyTonsOfOil/code/:code/year/:year", coalSupplyTonsOfOilController.getCoalSupplyTonsOfOilByCodeAndYear);
+router.get(
+  "/coalSupply/code/:code/year/:year",
+  coalSupplyController.getCoalSupplyByCodeAndYear
+);
+router.get(
+  "/coalSupplyTons/year/:year",
+  coalSupplyTonsController.getCoalSupplyTonsByYear
+);
+router.get(
+  "/coalSupplyTons/code/:code/year/:year",
+  coalSupplyTonsController.getCoalSupplyTonsByCodeAndYear
+);
+router.get(
+  "/coalSupplyTonsOfOil/year/:year",
+  coalSupplyTonsOfOilController.getCoalSupplyTonsOfOilByYear
+);
+router.get(
+  "/coalSupplyTonsOfOil/code/:code/year/:year",
+  coalSupplyTonsOfOilController.getCoalSupplyTonsOfOilByCodeAndYear
+);
 router.get("/monthesAll/year/:year", monthesAllController.getAllMonthsByYear);
-router.get("/monthesAll/year/:year/chart/:chart_id", monthesAllController.getMonthsByYearAndChartId);
-router.get("/mainNrgIndicators/:chartid", mainNrgIndicatorsController.getMainNrgIndicatorsByChartid);
-router.get("/gasPriceGel/:household", gasPriceGelController.getGasPriceGelByHousehold);
-router.get("/electricityPriceGel/:household", electricityPriceGelController.getelectricityPriceGelbyHousehold);
+router.get(
+  "/monthesAll/year/:year/chart/:chart_id",
+  monthesAllController.getMonthsByYearAndChartId
+);
+router.get(
+  "/mainNrgIndicators/:chartid",
+  mainNrgIndicatorsController.getMainNrgIndicatorsByChartid
+);
+router.get(
+  "/gasPriceGel/:household",
+  gasPriceGelController.getGasPriceGelByHousehold
+);
+router.get(
+  "/electricityPriceGel/:household",
+  electricityPriceGelController.getelectricityPriceGelbyHousehold
+);
+router.get("/object/:code", objectController.getObjByCode);
+router.get("/objects", objectController.getAllObjects);
 
 module.exports = router;
