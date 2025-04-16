@@ -18,11 +18,13 @@ const getObjByCode = async (req, res) => {
 };
 
 const getAllObjects = async (req, res) => {
+  const { year } = req.params;
   try {
     const pool = await poolPromise;
-    const query = `SELECT * FROM view_object_items`;
+    const query = `SELECT * FROM view_object_items WHERE year = @year`;
     const result = await pool
       .request()
+      .input("year", sql.Int, year)
       .query(query);
     res.json(result.recordset);
   } catch (err) {

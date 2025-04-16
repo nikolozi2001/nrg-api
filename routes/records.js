@@ -104,6 +104,6 @@ router.get(
   electricityPriceGelController.getelectricityPriceGelbyHousehold
 );
 router.get("/object/:code", objectController.getObjByCode);
-router.get("/objects", objectController.getAllObjects);
+router.get("/objects/year/:year", objectController.getAllObjects);
 
 module.exports = router;
