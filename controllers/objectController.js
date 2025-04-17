@@ -42,7 +42,7 @@ const getObjectsByYearAndSubCode = async (req, res) => {
     const result = await pool
       .request()
       .input("year", sql.Int, year)
-      .input("sub_code", sql.Int, sub_code)
+      .input("sub_code", sql.NVarChar, sub_code)
       .query(query);
     res.json(result.recordset);
   } catch (err) {
