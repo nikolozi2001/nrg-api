@@ -34,7 +34,26 @@ const getAllObjects = async (req, res) => {
   }
 };
 
+const getObjectsByYearAndSubCode = async (req, res) => {
+  const { year, sub_code } = req.params;
+  try {
+    const pool = await poolPromise;
+    const query = `SELECT * FROM view_object_items WHERE year = @year AND sub_code = @sub_code`;
+    const result = await pool
+      .request()
+      .input("year", sql.Int, year)
+      .input("sub_code", sql.Int, sub_code)
+      .query(query);
+    res.json(result.recordset);
+  } catch (err) {
+    console.error(`Error: ${err.message}`);
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
     getObjByCode,
     getAllObjects,
+    getObjectsByYearAndSubCode,
 };

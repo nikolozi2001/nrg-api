@@ -105,5 +105,6 @@ router.get(
 );
 router.get("/object/:code", objectController.getObjByCode);
 router.get("/objects/year/:year", objectController.getAllObjects);
+router.get("/objects/year/:year/sub_code/:sub_code", objectController.getObjectsByYearAndSubCode);
 
 module.exports = router;
