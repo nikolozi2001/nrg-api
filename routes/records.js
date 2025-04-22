@@ -19,7 +19,7 @@ const monthesAllController = require("../controllers/monthesAllController");
 const mainNrgIndicatorsController = require("../controllers/mainNrgIndicatorsController");
 const gasPriceGelController = require("../controllers/gasPriceGelController");
 const electricityPriceGelController = require("../controllers/electricityPriceGelController");
-const objectController = require("../controllers/objectController");
+const biofuelController = require("../controllers/biofuelController");
 
 router.get("/", (req, res) => {
   const readmePath = path.join(__dirname, "../README.md");
@@ -103,8 +103,8 @@ router.get(
   "/electricityPriceGel/:household",
   electricityPriceGelController.getelectricityPriceGelbyHousehold
 );
-router.get("/object/:code", objectController.getObjByCode);
-router.get("/objects/year/:year", objectController.getAllObjects);
-router.get("/objects/year/:year/sub_code/:sub_code", objectController.getObjectsByYearAndSubCode);
+router.get("/biofuel/:code", biofuelController.getBiofuelByCode);
+router.get("/biofuels/year/:year", biofuelController.getAllBiofuels);
+router.get("/biofuels/year/:year/sub_code/:sub_code", biofuelController.getBiofuelsByYearAndSubCode);
 
 module.exports = router;
