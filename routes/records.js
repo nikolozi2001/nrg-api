@@ -21,6 +21,7 @@ const gasPriceGelController = require("../controllers/gasPriceGelController");
 const electricityPriceGelController = require("../controllers/electricityPriceGelController");
 const objectController = require("../controllers/objectController");
 const biofuelController = require("../controllers/biofuelController");
+const sankeyResourceController = require("../controllers/sankeyResourceController");
 
 router.get("/", (req, res) => {
   const readmePath = path.join(__dirname, "../README.md");
@@ -104,7 +105,7 @@ router.get(
   "/electricityPriceGel/:household",
   electricityPriceGelController.getelectricityPriceGelbyHousehold
 );
-router.get("/object/:code", objectController.getObjByCode);
+router.get("/objects/:code", objectController.getObjByCode);
 router.get("/objects/year/:year", objectController.getAllObjects);
 router.get(
   "/objects/year/:year/sub_code/:sub_code",
@@ -116,6 +117,13 @@ router.get("/biofuel/year/:year", biofuelController.getAllBiofuels);
 router.get(
   "/biofuel/year/:year/sub_code/:sub_code",
   biofuelController.getBiofuelsByYearAndSubCode
+);
+
+router.get("/sankey/chart_id/:chart_id", sankeyResourceController.getSankeyByChartId);
+router.get("/sankey/year/:year", sankeyResourceController.getAllSankeys);
+router.get(
+  "/sankey/year/:year/chart_id/:chart_id",
+  sankeyResourceController.getSankeysByYearAndChartId
 );
 
 module.exports = router;

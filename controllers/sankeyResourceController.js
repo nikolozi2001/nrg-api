@@ -1,13 +1,13 @@
 const { sql, poolPromise } = require("../db");
 
-const getBiofuelByCode = async (req, res) => {
-  const { code } = req.params;
+const getSankeyByChartId = async (req, res) => {
+  const { chart_id } = req.params;
   try {
     const pool = await poolPromise;
-    const query = `SELECT * FROM vw_biofuel_api WHERE code = @code`;
+    const query = `SELECT * FROM Sankey_resource_code WHERE chart_id = @chart_id`;
     const result = await pool
       .request()
-      .input("code", sql.Int, code)
+      .input("chart_id", sql.Int, chart_id)
       .query(query);
     res.json(result.recordset);
   } catch (err) {
@@ -17,14 +17,14 @@ const getBiofuelByCode = async (req, res) => {
   }
 };
 
-const getAllBiofuels = async (req, res) => {
+const getAllSankeys = async (req, res) => {
   const { year } = req.params;
   try {
     const pool = await poolPromise;
-    const query = `SELECT * FROM vw_biofuel_api WHERE year = @year`;
+    const yearColumn = `y_${year}`;
+    const query = `SELECT * FROM Sankey_resource_code WHERE ${yearColumn} IS NOT NULL`;
     const result = await pool
       .request()
-      .input("year", sql.Int, year)
       .query(query);
     res.json(result.recordset);
   } catch (err) {
@@ -34,15 +34,15 @@ const getAllBiofuels = async (req, res) => {
   }
 };
 
-const getBiofuelsByYearAndSubCode = async (req, res) => {
-  const { year, sub_code } = req.params;
+const getSankeysByYearAndChartId = async (req, res) => {
+  const { year, chart_id } = req.params;
   try {
     const pool = await poolPromise;
-    const query = `SELECT * FROM vw_biofuel_api WHERE year = @year AND sub_code = @sub_code`;
+    const yearColumn = `y_${year}`;
+    const query = `SELECT * FROM Sankey_resource_code WHERE ${yearColumn} IS NOT NULL AND chart_id = @chart_id`;
     const result = await pool
       .request()
-      .input("year", sql.Int, year)
-      .input("sub_code", sql.NVarChar, sub_code)
+      .input("chart_id", sql.Int, chart_id)
       .query(query);
     res.json(result.recordset);
   } catch (err) {
@@ -53,7 +53,7 @@ const getBiofuelsByYearAndSubCode = async (req, res) => {
 };
 
 module.exports = {
-    getBiofuelByCode,
-    getAllBiofuels,
-    getBiofuelsByYearAndSubCode,
+    getSankeyByChartId,
+    getAllSankeys,
+    getSankeysByYearAndChartId,
 };
