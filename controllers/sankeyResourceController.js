@@ -22,7 +22,7 @@ const getAllSankeys = async (req, res) => {
   try {
     const pool = await poolPromise;
     const yearColumn = `y_${year}`;
-    const query = `SELECT * FROM Sankey_resource_code WHERE ${yearColumn} IS NOT NULL`;
+    const query = `SELECT column_name, chart_id, legend_code, ${yearColumn} AS value FROM Sankey_resource_code WHERE ${yearColumn} IS NOT NULL`;
     const result = await pool
       .request()
       .query(query);
@@ -39,7 +39,7 @@ const getSankeysByYearAndChartId = async (req, res) => {
   try {
     const pool = await poolPromise;
     const yearColumn = `y_${year}`;
-    const query = `SELECT * FROM Sankey_resource_code WHERE ${yearColumn} IS NOT NULL AND chart_id = @chart_id`;
+    const query = `SELECT column_name, chart_id, legend_code, ${yearColumn} AS value FROM Sankey_resource_code WHERE ${yearColumn} IS NOT NULL AND chart_id = @chart_id`;
     const result = await pool
       .request()
       .input("chart_id", sql.Int, chart_id)
