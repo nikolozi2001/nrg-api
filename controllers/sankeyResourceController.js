@@ -4,7 +4,7 @@ const getSankeyByChartId = async (req, res) => {
   const { chart_id } = req.params;
   try {
     const pool = await poolPromise;
-    const query = `SELECT * FROM Sankey_resource_code WHERE chart_id = @chart_id`;
+    const query = `SELECT * FROM vw_Sankey_Combined WHERE chart_id = @chart_id`;
     const result = await pool
       .request()
       .input("chart_id", sql.Int, chart_id)
@@ -22,10 +22,8 @@ const getAllSankeys = async (req, res) => {
   try {
     const pool = await poolPromise;
     const yearColumn = `y_${year}`;
-    const query = `SELECT column_name, chart_id, legend_code, ${yearColumn} AS value FROM Sankey_resource_code WHERE ${yearColumn} IS NOT NULL`;
-    const result = await pool
-      .request()
-      .query(query);
+    const query = `SELECT column_name, chart_id, legend_code, res_chart_id, res_legend_code,${yearColumn} AS value FROM vw_Sankey_Combined WHERE ${yearColumn} IS NOT NULL`;
+    const result = await pool.request().query(query);
     res.json(result.recordset);
   } catch (err) {
     console.error(`Error: ${err.message}`);
@@ -39,7 +37,7 @@ const getSankeysByYearAndChartId = async (req, res) => {
   try {
     const pool = await poolPromise;
     const yearColumn = `y_${year}`;
-    const query = `SELECT column_name, chart_id, legend_code, ${yearColumn} AS value FROM Sankey_resource_code WHERE ${yearColumn} IS NOT NULL AND chart_id = @chart_id`;
+    const query = `SELECT column_name, chart_id, legend_code, res_chart_id, res_legend_code, ${yearColumn} AS value FROM vw_Sankey_Combined WHERE ${yearColumn} IS NOT NULL AND chart_id = @chart_id`;
     const result = await pool
       .request()
       .input("chart_id", sql.Int, chart_id)
@@ -53,7 +51,7 @@ const getSankeysByYearAndChartId = async (req, res) => {
 };
 
 module.exports = {
-    getSankeyByChartId,
-    getAllSankeys,
-    getSankeysByYearAndChartId,
+  getSankeyByChartId,
+  getAllSankeys,
+  getSankeysByYearAndChartId,
 };
