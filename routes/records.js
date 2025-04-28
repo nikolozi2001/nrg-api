@@ -24,6 +24,7 @@ const biofuelController = require("../controllers/biofuelController");
 const sankeyResourceController = require("../controllers/sankeyResourceController");
 const oilController = require("../controllers/oilController");
 const electrycityHeatController = require("../controllers/electrycityHeatController");
+const naturalGasController = require("../controllers/naturalGasController");
 
 router.get("/", (req, res) => {
   const readmePath = path.join(__dirname, "../README.md");
@@ -121,7 +122,10 @@ router.get(
   biofuelController.getBiofuelsByYearAndSubCode
 );
 
-router.get("/sankey/chart_id/:chart_id", sankeyResourceController.getSankeyByChartId);
+router.get(
+  "/sankey/chart_id/:chart_id",
+  sankeyResourceController.getSankeyByChartId
+);
 router.get("/sankey/year/:year", sankeyResourceController.getAllSankeys);
 router.get(
   "/sankey/year/:year/chart_id/:chart_id",
@@ -130,13 +134,32 @@ router.get(
 
 router.get("/oil/:code", oilController.getOilByCode);
 router.get("/oil/year/:year", oilController.getAllOilsByYear);
-router.get("/oil/year/:year/sub_code/:sub_code", oilController.getOilByYearAndSubCode);
+router.get(
+  "/oil/year/:year/sub_code/:sub_code",
+  oilController.getOilByYearAndSubCode
+);
 
-router.get("/electricityHeat/:code", electrycityHeatController.getElectricityByCode);
-router.get("/electricityHeat/year/:year", electrycityHeatController.getAllElectricityByYear);
+router.get(
+  "/electricityHeat/:code",
+  electrycityHeatController.getElectricityByCode
+);
+router.get(
+  "/electricityHeat/year/:year",
+  electrycityHeatController.getAllElectricityByYear
+);
 router.get(
   "/electricityHeat/year/:year/sub_code/:sub_code",
   electrycityHeatController.getElectricityByYearAndSubCode
+);
+
+router.get("/naturalGas/:code", naturalGasController.getNaturalGasByCode);
+router.get(
+  "/naturalGas/year/:year",
+  naturalGasController.getAllNaturalGasByYear
+);
+router.get(
+  "/naturalGas/year/:year/sub_code/:sub_code",
+  naturalGasController.getNaturalGasByYearAndSubCode
 );
 
 module.exports = router;
