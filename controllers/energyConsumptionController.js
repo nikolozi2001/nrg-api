@@ -4,7 +4,7 @@ const getEnergyConsumptionByLegendCode = async (req, res) => {
   const { legend_code } = req.params;
   try {
     const pool = await poolPromise;
-    const query = `SELECT legend_code, measure, y_2023, y_2022, growthRate 
+    const query = `SELECT * 
                   FROM energyConsumption 
                   WHERE legend_code = @legend_code`;
     const result = await pool
