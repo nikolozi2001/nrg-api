@@ -4,7 +4,7 @@ const getElectricityByCode = async (req, res) => {
   const { code } = req.params;
   try {
     const pool = await poolPromise;
-    const query = `SELECT * FROM vw_electricity_and_heat WHERE code = @code`;
+    const query = `SELECT * FROM vw_electricity_and_heat_excel WHERE code = @code`;
     const result = await pool
       .request()
       .input("code", sql.Int, code)
@@ -21,7 +21,7 @@ const getAllElectricityByYear = async (req, res) => {
   const { year } = req.params;
   try {
     const pool = await poolPromise;
-    const query = `SELECT * FROM vw_electricity_and_heat WHERE year = @year`;
+    const query = `SELECT * FROM vw_electricity_and_heat_excel WHERE year = @year`;
     const result = await pool
       .request()
       .input("year", sql.Int, year)
@@ -38,7 +38,7 @@ const getElectricityByYearAndSubCode = async (req, res) => {
   const { year, sub_code } = req.params;
   try {
     const pool = await poolPromise;
-    const query = `SELECT * FROM vw_electricity_and_heat WHERE year = @year AND sub_code = @sub_code`;
+    const query = `SELECT * FROM vw_electricity_and_heat_excel WHERE year = @year AND sub_code = @sub_code`;
     const result = await pool
       .request()
       .input("year", sql.Int, year)

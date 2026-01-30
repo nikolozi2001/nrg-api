@@ -4,7 +4,7 @@ const getNaturalGasByCode = async (req, res) => {
   const { code } = req.params;
   try {
     const pool = await poolPromise;
-    const query = `SELECT * FROM vw_natural_gas WHERE code = @code`;
+    const query = `SELECT * FROM vw_natural_gas WHERE code = @code order by id`;
     const result = await pool
       .request()
       .input("code", sql.Int, code)
@@ -21,7 +21,7 @@ const getAllNaturalGasByYear = async (req, res) => {
   const { year } = req.params;
   try {
     const pool = await poolPromise;
-    const query = `SELECT * FROM vw_natural_gas WHERE year = @year`;
+    const query = `SELECT * FROM vw_natural_gas WHERE year = @year order by id`;
     const result = await pool
       .request()
       .input("year", sql.Int, year)
@@ -38,7 +38,7 @@ const getNaturalGasByYearAndSubCode = async (req, res) => {
   const { year, sub_code } = req.params;
   try {
     const pool = await poolPromise;
-    const query = `SELECT * FROM vw_natural_gas WHERE year = @year AND sub_code = @sub_code`;
+    const query = `SELECT * FROM vw_natural_gas WHERE year = @year AND sub_code = @sub_code order by id`;
     const result = await pool
       .request()
       .input("year", sql.Int, year)
