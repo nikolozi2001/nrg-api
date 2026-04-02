@@ -44,6 +44,8 @@ router.get("/records/:id", recordsController.getRecordById);
 // router.delete("/:id", recordsController.deleteRecord);
 
 router.get("/households/:id", householdsController.getRecordByChart_id);
+router.get("/monthes/years", monthesController.getMonthYears);
+router.get("/monthes/latest-year", monthesController.getLastMonthYear);
 router.get("/monthes/:year/:chart_id", monthesController.getMonthByChart_id);
 router.get(
   "/resource/:year/:chart_id",
@@ -52,6 +54,10 @@ router.get(
 router.get(
   "/householdswithcodes/:id",
   households_with_codesController.getHouseholds_with_codesByChart_id
+);
+router.get(
+  "/resourceswithcodes/years",
+  resource_with_codesController.getResourceYears
 );
 router.get(
   "/resourceswithcodes/:id",
