@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
-const rateLimit = require("express-rate-limit");
 const os = require("os");
 const errorHandler = require("./middleware/errorHandler");
 const { poolPromise } = require("./db");
@@ -32,29 +31,26 @@ app.use(
       directives: {
         defaultSrc: ["'self'"],
         styleSrc: ["'self'", "'unsafe-inline'"],
-        scriptSrc: ["'self'", "'unsafe-inline'"], // Added unsafe-inline for your dashboard
-        connectSrc: ["'self'", "https://energy-api.geostat.ge"], // ALLOW your API domain
+        scriptSrc: ["'self'", "'unsafe-inline'"],
+        connectSrc: ["'self'", "https://energy-api.geostat.ge", "http://localhost:3000"], 
         imgSrc: ["'self'", "data:"],
       },
     },
   }),
 );
 
+// CORS configuration
 app.use(
   cors({
-    origin: "https://energy.geostat.ge", // Your frontend URL
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      return callback(null, true);
+    },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   }),
 );
-
-// Rate limiting
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
-});
-app.use(limiter);
 
 app.use(express.json());
 
